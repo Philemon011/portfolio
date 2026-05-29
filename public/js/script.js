@@ -433,3 +433,75 @@ document.addEventListener('keydown', (e) => {
         });
     }
 });
+
+
+
+
+/* ==========================================================================
+   TOOLS MARQUEE - DÉFILEMENT TACTILE & SOURIS
+   ========================================================================== */
+const marqueeWrapper = document.querySelector('.tools-marquee-wrapper');
+const marqueeTrack = document.querySelector('.tools-marquee-track');
+
+if (marqueeWrapper && marqueeTrack) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // Pause l'animation CSS au toucher
+    const pauseAnimation = () => {
+        marqueeTrack.style.animationPlayState = 'paused';
+    };
+
+    const resumeAnimation = () => {
+        if (!isDown) {
+            marqueeTrack.style.animationPlayState = 'running';
+        }
+    };
+
+    // Souris
+    marqueeWrapper.addEventListener('mousedown', (e) => {
+        isDown = true;
+        pauseAnimation();
+        startX = e.pageX - marqueeWrapper.offsetLeft;
+        scrollLeft = marqueeWrapper.scrollLeft;
+    });
+
+    marqueeWrapper.addEventListener('mouseleave', () => {
+        isDown = false;
+        resumeAnimation();
+    });
+
+    marqueeWrapper.addEventListener('mouseup', () => {
+        isDown = false;
+        resumeAnimation();
+    });
+
+    marqueeWrapper.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - marqueeWrapper.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        marqueeWrapper.scrollLeft = scrollLeft - walk;
+    });
+
+    // Tactile (doigt)
+    marqueeWrapper.addEventListener('touchstart', (e) => {
+        isDown = true;
+        pauseAnimation();
+        startX = e.touches[0].pageX - marqueeWrapper.offsetLeft;
+        scrollLeft = marqueeWrapper.scrollLeft;
+    }, { passive: true });
+
+    marqueeWrapper.addEventListener('touchend', () => {
+        isDown = false;
+        resumeAnimation();
+    });
+
+    marqueeWrapper.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        const x = e.touches[0].pageX - marqueeWrapper.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        marqueeWrapper.scrollLeft = scrollLeft - walk;
+    }, { passive: true });
+}

@@ -1,4 +1,3 @@
-<!-- SECTION ACCUEIL (HERO) -->
 <section id="accueil" class="section hero">
     <div class="container hero-container">
         <div class="hero-wrapper">
@@ -33,6 +32,24 @@
             <p class="hero-subtitle scroll-reveal fade-up delay-300">
                 {!! $settings->hero_sous_titre !!}
             </p>
+
+            <!-- Bande défilante -->
+            <div class="tools-marquee-wrapper scroll-reveal fade-up delay-400">
+                <div class="tools-marquee-track">
+                    @foreach([1, 2] as $loop)
+                    <div class="tools-marquee-list">
+                        @foreach($tools as $tool)
+                        <div class="tool-chip">
+                            <img src="{{ asset('storage/' . $tool->logo) }}"
+                                alt="{{ $tool->nom }}"
+                                class="tool-logo">
+                            <span class="tool-name">{{ $tool->nom }}</span>
+                        </div>
+                        @endforeach
+                    </div>
+                    @endforeach
+                </div>
+            </div>
 
         </div>
     </div>

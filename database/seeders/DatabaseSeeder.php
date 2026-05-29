@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             ProjectSeeder::class,
             TestimonialSeeder::class,
+            ToolSeeder::class
         ]);
     }
 }

@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Tool extends Model
+{
+    protected $fillable = [
+        'nom',
+        'logo',
+        'actif',
+        'ordre',
+    ];
+
+    protected $casts = [
+        'actif' => 'boolean',
+    ];
+
+    public function scopeActifs($query)
+    {
+        return $query->where('actif', true)->orderBy('ordre');
+    }
+}

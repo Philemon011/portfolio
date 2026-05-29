@@ -14,7 +14,7 @@ class SettingSeeder extends Seeder
             'metier' => 'Développeur Fullstack',
             'email' => 'etoundelight1@gmail.com',
             'telephone' => '+229 01 60 58 59 50',
-            'whatsapp' => '+22901605850',
+            'whatsapp' => '+2290160585950',
             'github' => 'https://github.com/Philemon011',
             'linkedin' => 'https://www.linkedin.com/in/etounde-philémon-8111222aa',
 
