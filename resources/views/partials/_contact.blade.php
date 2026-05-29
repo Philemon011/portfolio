@@ -37,21 +37,28 @@
 
                 <div class="contact-socials">
 
-                    @if($settings->linkedin)
-                    <a href="{{ $settings->linkedin }}" target="_blank"
-                        rel="noopener noreferrer" class="social-icon">
-                        LinkedIn
-                    </a>
-                    @endif
+    @if($settings->linkedin)
+    <a href="{{ $settings->linkedin }}" target="_blank"
+        rel="noopener noreferrer" class="social-icon">
+        LinkedIn
+    </a>
+    @endif
 
-                    @if($settings->github)
-                    <a href="{{ $settings->github }}" target="_blank"
-                        rel="noopener noreferrer" class="social-icon">
-                        GitHub
-                    </a>
-                    @endif
+    @if($settings->github)
+    <a href="{{ $settings->github }}" target="_blank"
+        rel="noopener noreferrer" class="social-icon">
+        GitHub
+    </a>
+    @endif
 
-                </div>
+    @if($settings->facebook)
+    <a href="{{ $settings->facebook }}" target="_blank"
+        rel="noopener noreferrer" class="social-icon">
+        Facebook
+    </a>
+    @endif
+
+</div>
 
             </div>
 

@@ -14,6 +14,7 @@ class Setting extends Model
         'whatsapp',
         'github',
         'linkedin',
+        'facebook',
         'hero_titre',
         'hero_sous_titre',
         'avatar_light',
