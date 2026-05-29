@@ -1148,7 +1148,12 @@ button {
 
 .contact-socials {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+}
+
+.contact-socials .social-icon {
+    width: calc(33.33% - 14px);
 }
 
 .social-icon {
