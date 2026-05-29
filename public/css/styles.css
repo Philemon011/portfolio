@@ -1413,3 +1413,9 @@ button {
 .tools-marquee-wrapper::-webkit-scrollbar {
     display: none; /* Chrome, Safari */
 }
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
