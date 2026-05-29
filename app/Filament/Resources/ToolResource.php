@@ -13,9 +13,13 @@ use Filament\Tables\Table;
 class ToolResource extends Resource
 {
     protected static ?string $model = Tool::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-cpu-chip';
+
     protected static ?string $navigationLabel = 'Outils';
+
     protected static ?string $modelLabel = 'Outil';
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
@@ -28,6 +32,15 @@ class ToolResource extends Resource
 
             Forms\Components\FileUpload::make('logo')
                 ->label('Logo (SVG ou PNG)')
+                ->hint('Télécharge tes logos sur svgl.app')
+                ->hintIcon('heroicon-o-arrow-top-right-on-square')
+                ->hintColor('info')
+                ->hintAction(
+                    Forms\Components\Actions\Action::make('svgl')
+                        ->label('Ouvrir svgl.app')
+                        ->url('https://svgl.app')
+                        ->openUrlInNewTab()
+                )
                 ->image()
                 ->directory('tools')
                 ->acceptedFileTypes(['image/svg+xml', 'image/png', 'image/jpeg'])
@@ -73,9 +86,9 @@ class ToolResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListTools::route('/'),
+            'index' => Pages\ListTools::route('/'),
             'create' => Pages\CreateTool::route('/create'),
-            'edit'   => Pages\EditTool::route('/{record}/edit'),
+            'edit' => Pages\EditTool::route('/{record}/edit'),
         ];
     }
 }
