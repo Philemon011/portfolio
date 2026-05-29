@@ -102,19 +102,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const sectionId = current.getAttribute('id');
 
             if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
+
+                    if (link.getAttribute('href').includes(`#${sectionId}`)) {
                         link.classList.add('active');
                     }
                 });
 
                 drawerLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
+
+                    if (link.getAttribute('href').includes(`#${sectionId}`)) {
                         link.classList.add('active');
                     }
                 });
+
             }
         });
     });
@@ -204,33 +208,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-/* ==========================================================================
-   PORTFOLIO PROJECT DETAILS DATA & MODAL INJECTOR
-   ========================================================================== */
-const projectsData = window.projectsData || {};
+    /* ==========================================================================
+       PORTFOLIO PROJECT DETAILS DATA & MODAL INJECTOR
+       ========================================================================== */
+    const projectsData = window.projectsData || {};
 
-const modal = document.getElementById('portfolio-modal');
-const modalCloseBtn = document.getElementById('modal-close-btn');
-const modalBody = document.getElementById('modal-body-content');
+    const modal = document.getElementById('portfolio-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalBody = document.getElementById('modal-body-content');
 
-function openModal(projectId) {
-    const data = projectsData[projectId];
-    if (!data) return;
+    function openModal(projectId) {
+        const data = projectsData[projectId];
+        if (!data) return;
 
-    // Technologies : tableau PHP devient tableau JS grâce à @json
-    const techBadges = data.technologies
-        .map(tech => `<span class="tag-badge">${tech}</span>`)
-        .join('');
+        // Technologies : tableau PHP devient tableau JS grâce à @json
+        const techBadges = data.technologies
+            .map(tech => `<span class="tag-badge">${tech}</span>`)
+            .join('');
 
-    // Lien du projet si disponible
-    const lienBtn = data.lien
-        ? `<a href="${data.lien}" target="_blank" rel="noopener noreferrer"
+        // Lien du projet si disponible
+        const lienBtn = data.lien
+            ? `<a href="${data.lien}" target="_blank" rel="noopener noreferrer"
                 class="btn btn-primary-pill btn-sm">
                 <span>Voir le projet</span>
            </a>`
-        : '';
+            : '';
 
-    modalBody.innerHTML = `
+        modalBody.innerHTML = `
         <img src="/storage/${data.image}"
             alt="${data.titre}"
             class="modal-project-img">
@@ -268,37 +272,37 @@ function openModal(projectId) {
         </div>
     `;
 
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-}
-
-window.closeModal = function () {
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-};
-
-// Ouvrir le modal au clic sur une carte projet
-projectCards.forEach(card => {
-    card.addEventListener('click', () => {
-        const projId = card.getAttribute('data-project');
-        openModal(projId);
-    });
-});
-
-// Fermer le modal
-if (modalCloseBtn) {
-    modalCloseBtn.addEventListener('click', closeModal);
-}
-if (modal) {
-    modal.querySelector('.modal-backdrop').addEventListener('click', closeModal);
-}
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
-        closeModal();
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
     }
-});
+
+    window.closeModal = function () {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    };
+
+    // Ouvrir le modal au clic sur une carte projet
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const projId = card.getAttribute('data-project');
+            openModal(projId);
+        });
+    });
+
+    // Fermer le modal
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
+    }
+    if (modal) {
+        modal.querySelector('.modal-backdrop').addEventListener('click', closeModal);
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
 
     /* ==========================================================================
        TESTIMONIALS SLIDER (CAROUSEL)
@@ -504,4 +508,28 @@ if (marqueeWrapper && marqueeTrack) {
         const walk = (x - startX) * 1.5;
         marqueeWrapper.scrollLeft = scrollLeft - walk;
     }, { passive: true });
+}
+
+/* ==========================================================================
+   BACK TO TOP
+   ========================================================================== */
+const backToTopBtn = document.getElementById('back-to-top');
+
+if (backToTopBtn) {
+    // Afficher le bouton après 400px de scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+
+    // Remonter en haut au clic
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 }

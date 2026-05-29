@@ -44,12 +44,12 @@
 
             <nav class="nav">
                 <ul class="nav-list">
-                    <li><a href="#accueil" class="nav-link active">Accueil</a></li>
-                    <li><a href="#apropos" class="nav-link">A Propos</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    <li><a href="#realisations" class="nav-link">Réalisations</a></li>
-                    <li><a href="#temoignages" class="nav-link">Témoignages</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="{{ url('/') }}#accueil" class="nav-link active">Accueil</a></li>
+                    <li><a href="{{ url('/') }}#apropos" class="nav-link">A Propos</a></li>
+                    <li><a href="{{ url('/') }}#services" class="nav-link">Services</a></li>
+                    <li><a href="{{ url('/') }}#realisations" class="nav-link">Réalisations</a></li>
+                    <li><a href="{{ url('/') }}#temoignages" class="nav-link">Témoignages</a></li>
+                    <li><a href="{{ url('/') }}#contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
 
@@ -71,12 +71,12 @@
     <div class="mobile-drawer" id="mobile-drawer">
         <nav class="drawer-nav">
             <ul class="drawer-list">
-                <li><a href="#accueil" class="drawer-link">Accueil</a></li>
-                <li><a href="#apropos" class="drawer-link">A Propos</a></li>
-                <li><a href="#services" class="drawer-link">Services</a></li>
-                <li><a href="#realisations" class="drawer-link">Réalisations</a></li>
-                <li><a href="#temoignages" class="drawer-link">Témoignages</a></li>
-                <li><a href="#contact" class="drawer-link">Contact</a></li>
+                <li><a href="{{ url('/') }}#accueil" class="drawer-link">Accueil</a></li>
+                <li><a href="{{ url('/') }}#apropos" class="drawer-link">A Propos</a></li>
+                <li><a href="{{ url('/') }}#services" class="drawer-link">Services</a></li>
+                <li><a href="{{ url('/') }}#realisations" class="drawer-link">Réalisations</a></li>
+                <li><a href="{{ url('/') }}#temoignages" class="drawer-link">Témoignages</a></li>
+                <li><a href="{{ url('/') }}#contact" class="drawer-link">Contact</a></li>
             </ul>
             <div class="drawer-actions">
                 @if($settings->whatsapp)
@@ -120,6 +120,10 @@
             <p class="copyright">&copy; {{ date('Y') }} Philémon Dev. Tous droits réservés.</p>
         </div>
     </footer>
+    <!-- Bouton retour en haut -->
+    <button class="back-to-top" id="back-to-top" aria-label="Retour en haut">
+        <i data-lucide="arrow-up"></i>
+    </button>
 
     <!-- Données dynamiques pour le JS -->
     <script>

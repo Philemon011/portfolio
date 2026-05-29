@@ -776,10 +776,43 @@ button {
    SECTION: RÉALISATIONS
    ========================================================================== */
 
+.portfolio-tabs-wrapper {
+    position: relative;
+}
+
+.portfolio-tabs-wrapper::before,
+.portfolio-tabs-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* .portfolio-tabs-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-body), transparent);
+}
+
+.portfolio-tabs-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-body), transparent);
+} */
+
 .portfolio-tabs {
     display: flex;
     gap: 12px;
     margin-bottom: 40px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+}
+
+.portfolio-tabs::-webkit-scrollbar {
+    display: none;
 }
 
 .tab-btn {
@@ -1147,22 +1180,34 @@ button {
 }
 
 .contact-socials {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.contact-socials .social-icon {
-    width: calc(33.33% - 14px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
 }
 
 .social-icon {
-    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    font-size: 0.88rem;
     font-weight: 500;
+    transition: border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
 .social-icon:hover {
-    color: var(--accent-underline);
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .contact-socials {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* Form Styles */
@@ -1423,4 +1468,145 @@ button {
     display: inline-flex;
     align-items: center;
     gap: 6px;
+}
+
+/* ==========================================================================
+   BACK TO TOP
+   ========================================================================== */
+
+.back-to-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px);
+}
+
+.back-to-top svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+.modal-project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+@media (max-width: 480px) {
+    .modal-project-actions {
+        flex-direction: column;
+    }
+
+    .modal-project-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.voir-plus-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+
+/* ==========================================================================
+   PAGINATION
+   ========================================================================== */
+
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 50px;
+}
+
+.pagination-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+    background: none;
+    cursor: pointer;
+}
+
+.pagination-btn:hover:not([disabled]) {
+    border-color: var(--text-secondary);
+    transform: translateY(-2px);
+}
+
+.pagination-btn[disabled] {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.pagination-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.pagination-pages {
+    display: flex;
+    gap: 8px;
+}
+
+.pagination-page {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-title);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.pagination-page:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+.pagination-page.active {
+    background-color: var(--text-primary);
+    color: var(--bg-body);
+    border-color: var(--text-primary);
 }

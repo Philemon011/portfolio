@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         $settings     = Setting::getSettings();
         $services     = Service::actifs()->get();
-        $projects     = Project::actifs()->get();
+        $projects = Project::actifs()->limit(4)->get();
         $testimonials = Testimonial::actifs()->get();
         $tools        = Tool::actifs()->get();
 

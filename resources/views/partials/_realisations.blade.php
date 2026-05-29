@@ -37,5 +37,12 @@
             @endforeach
 
         </div>
+         <!-- Bouton voir plus -->
+        <div class="voir-plus-wrapper scroll-reveal fade-up">
+            <a href="{{ route('projects.index') }}" class="btn btn-primary-pill">
+                <span>Voir tous mes projets</span>
+                <i data-lucide="arrow-right"></i>
+            </a>
+        </div>
     </div>
 </section>
