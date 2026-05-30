@@ -47,41 +47,77 @@
         </div>
 
         <!-- Pagination -->
-        @if($projects->hasPages())
-        <div class="pagination-wrapper scroll-reveal fade-up">
-            {{-- Précédent --}}
-            @if($projects->onFirstPage())
-                <button class="pagination-btn" disabled>
-                    <i data-lucide="arrow-left"></i>
-                </button>
-            @else
-                <a href="{{ $projects->previousPageUrl() }}" class="pagination-btn">
-                    <i data-lucide="arrow-left"></i>
-                </a>
-            @endif
+@if($projects->hasPages())
+<div class="pagination-wrapper scroll-reveal fade-up">
 
-            {{-- Pages --}}
-            <div class="pagination-pages">
-                @for($i = 1; $i <= $projects->lastPage(); $i++)
-                <a href="{{ $projects->url($i) }}"
-                    class="pagination-page {{ $projects->currentPage() === $i ? 'active' : '' }}">
-                    {{ $i }}
-                </a>
-                @endfor
-            </div>
+    {{-- Précédent --}}
+    @if($projects->onFirstPage())
+        <button class="pagination-btn" disabled>
+            <i data-lucide="arrow-left"></i>
+        </button>
+    @else
+        <a href="{{ $projects->previousPageUrl() }}" class="pagination-btn">
+            <i data-lucide="arrow-left"></i>
+        </a>
+    @endif
 
-            {{-- Suivant --}}
-            @if($projects->hasMorePages())
-                <a href="{{ $projects->nextPageUrl() }}" class="pagination-btn">
-                    <i data-lucide="arrow-right"></i>
-                </a>
-            @else
-                <button class="pagination-btn" disabled>
-                    <i data-lucide="arrow-right"></i>
-                </button>
-            @endif
-        </div>
+    {{-- Pages intelligentes --}}
+    <div class="pagination-pages">
+        @php
+            $current = $projects->currentPage();
+            $last = $projects->lastPage();
+        @endphp
+
+        {{-- Première page --}}
+        <a href="{{ $projects->url(1) }}"
+            class="pagination-page {{ $current === 1 ? 'active' : '' }}">
+            1
+        </a>
+
+        {{-- "..." gauche si on est loin du début --}}
+        @if($current > 3)
+            <span class="pagination-dots">...</span>
         @endif
+
+        {{-- Pages autour de la page courante --}}
+        {{-- Pages autour de la page courante --}}
+@php
+    $range = request()->is('*mobile*') ? 1 : 1;
+@endphp
+@for($i = max(2, $current - 1); $i <= min($last - 1, $current + 1); $i++)
+    <a href="{{ $projects->url($i) }}"
+        class="pagination-page {{ $current === $i ? 'active' : '' }}">
+        {{ $i }}
+    </a>
+@endfor
+
+        {{-- "..." droite si on est loin de la fin --}}
+        @if($current < $last - 2)
+            <span class="pagination-dots">...</span>
+        @endif
+
+        {{-- Dernière page --}}
+        @if($last > 1)
+            <a href="{{ $projects->url($last) }}"
+                class="pagination-page {{ $current === $last ? 'active' : '' }}">
+                {{ $last }}
+            </a>
+        @endif
+    </div>
+
+    {{-- Suivant --}}
+    @if($projects->hasMorePages())
+        <a href="{{ $projects->nextPageUrl() }}" class="pagination-btn">
+            <i data-lucide="arrow-right"></i>
+        </a>
+    @else
+        <button class="pagination-btn" disabled>
+            <i data-lucide="arrow-right"></i>
+        </button>
+    @endif
+
+</div>
+@endif
 
         <!-- Retour accueil -->
         <div class="voir-plus-wrapper scroll-reveal fade-up">
